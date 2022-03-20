@@ -1,0 +1,5 @@
+"E:\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" "E:\Stud\6 sem\Comp Graphics\COMP_GRAPHICS_2"
+-- Found SFML 2.5.1 in C:/SFML/include
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/cmake-build-debug
