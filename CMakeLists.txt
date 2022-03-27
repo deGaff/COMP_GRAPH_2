@@ -3,7 +3,7 @@ project(COMP_GRAPHICS_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(COMP_GRAPHICS_2 main.cpp b_spline.cpp b_spline.h)
+add_executable(COMP_GRAPHICS_2 main.cpp b_spline.cpp b_spline.h profile.h)
 
 include_directories(c:/SFML/include)
 link_directories(C:/SFML/include)

@@ -3,18 +3,6 @@
 
 #include "b_spline.h"
 
-//Glboal variables, functions, classes
-
-int GetClickedPoint(std::array<sf::CircleShape, CONTROL_SIZE> rects, int len, int mouseX, int mouseY) {
-    for (int i = 0; i < len; i++) {
-        if (rects[i].getGlobalBounds().contains(mouseX, mouseY)) {
-            return i;
-        }
-    }
-
-    return -1;
-}
-
 
 
 //C++ program entry point
@@ -43,7 +31,8 @@ int main()
     int mouseY = 0;
     int pointIndex = -1;
 
-    b_spline spline;
+    b_spline spline = b_spline_builder().setControlSize(7).setMaxDegree(6)
+            .setOffset(1000).Build();
 
     //Game loop
     while (event.type != sf::Event::Closed)
@@ -56,12 +45,13 @@ int main()
             {
                 mouseClicked = true;
 
-                if ((pointIndex = GetClickedPoint(spline.control_points, 7, event.mouseButton.x, event.mouseButton.y)) >= 0)
+                if ((pointIndex = spline.GetClickedPoint(event.mouseButton.x, event.mouseButton.y)) >= 0)
                 {
                     //TODO make smaller :|
+                    auto& circ = spline.GetControlPoint(pointIndex);
                     dragging = true;
-                    mouseRectOffset.x = event.mouseButton.x - spline.control_points[pointIndex].getGlobalBounds().left - spline.control_points[pointIndex].getOrigin().x;
-                    mouseRectOffset.y = event.mouseButton.y - spline.control_points[pointIndex].getGlobalBounds().top - spline.control_points[pointIndex].getOrigin().y;
+                    mouseRectOffset.x = event.mouseButton.x - circ.getGlobalBounds().left - circ.getOrigin().x;
+                    mouseRectOffset.y = event.mouseButton.y - circ.getGlobalBounds().top - circ.getOrigin().y;
                 }
             }
 
@@ -79,22 +69,29 @@ int main()
                 mouseX = event.mouseMove.x;
                 mouseY = event.mouseMove.y;
             }
+
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                ++spline;
+            }
         }
 
         //LOGIC
 
-        if (dragging == true)
+        if (dragging)
         {
-            //TODO make smaller :|
-            spline.control_points[pointIndex].setPosition(mouseX - mouseRectOffset.x, mouseY - mouseRectOffset.y);
-            spline.update();
+            auto& circ = spline.GetControlPoint(pointIndex);
+            float x = mouseX - mouseRectOffset.x;
+            float y = mouseY - mouseRectOffset.y;
+            if(x > 0 && x < 1280 && y > 0 && y < 800) {
+                circ.setPosition(x, y);
+                spline.update();
+            }
         }
 
         //RENDERING
         window.clear();
 
-        for (int i = 0; i < MAX_DEG; i++)
-            window << spline;
+        window << spline;
 
         window.display();
     }

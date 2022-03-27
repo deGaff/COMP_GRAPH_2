@@ -95,6 +95,9 @@
 		<Unit filename="E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/main.cpp">
 			<Option target="COMP_GRAPHICS_2"/>
 		</Unit>
+		<Unit filename="E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/profile.h">
+			<Option target="COMP_GRAPHICS_2"/>
+		</Unit>
 		<Unit filename="E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
