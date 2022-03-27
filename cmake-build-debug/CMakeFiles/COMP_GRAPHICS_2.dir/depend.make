@@ -77,7 +77,8 @@ CMakeFiles/COMP_GRAPHICS_2.dir/b_spline.cpp.obj: \
  C:/SFML/include/SFML/Window/WindowHandle.hpp \
  C:/SFML/include/SFML/Window/WindowStyle.hpp \
  ../b_spline.cpp \
- ../b_spline.h
+ ../b_spline.h \
+ ../profile.h
 CMakeFiles/COMP_GRAPHICS_2.dir/main.cpp.obj: \
  C:/SFML/include/SFML/Config.hpp \
  C:/SFML/include/SFML/Graphics.hpp \
@@ -154,4 +155,5 @@ CMakeFiles/COMP_GRAPHICS_2.dir/main.cpp.obj: \
  C:/SFML/include/SFML/Window/WindowHandle.hpp \
  C:/SFML/include/SFML/Window/WindowStyle.hpp \
  ../b_spline.h \
- ../main.cpp
+ ../main.cpp \
+ ../profile.h

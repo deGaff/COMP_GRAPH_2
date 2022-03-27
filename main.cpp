@@ -31,8 +31,8 @@ int main()
     int mouseY = 0;
     int pointIndex = -1;
 
-    b_spline spline = b_spline_builder().setControlSize(7).setMaxDegree(6)
-            .setOffset(1000).Build();
+    b_spline spline = b_spline_builder().setControlSize(15).setMaxDegree(12)
+            .setOffset(10000).Build();
 
     //Game loop
     while (event.type != sf::Event::Closed)

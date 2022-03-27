@@ -679,10 +679,14 @@ C:/SFML/include/SFML/Window/WindowStyle.hpp
 E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.cpp
 b_spline.h
 E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.h
+iostream
+-
 
 E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.h
 SFML/Graphics.hpp
 -
+profile.h
+E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/profile.h
 vector
 -
 array
@@ -697,4 +701,14 @@ iostream
 -
 b_spline.h
 E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.h
+
+E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/profile.h
+chrono
+-
+iostream
+-
+string
+-
+sstream
+-
 

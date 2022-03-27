@@ -78,6 +78,7 @@ CMakeFiles/COMP_GRAPHICS_2.dir/b_spline.cpp.obj
  C:/SFML/include/SFML/Window/WindowStyle.hpp
  E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.cpp
  E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.h
+ E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/profile.h
 CMakeFiles/COMP_GRAPHICS_2.dir/main.cpp.obj
  C:/SFML/include/SFML/Config.hpp
  C:/SFML/include/SFML/Graphics.hpp
@@ -155,3 +156,4 @@ CMakeFiles/COMP_GRAPHICS_2.dir/main.cpp.obj
  C:/SFML/include/SFML/Window/WindowStyle.hpp
  E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/b_spline.h
  E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/main.cpp
+ E:/Stud/6 sem/Comp Graphics/COMP_GRAPHICS_2/profile.h

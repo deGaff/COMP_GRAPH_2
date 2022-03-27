@@ -5,9 +5,12 @@
 #ifndef COMP_GRAPHICS_2_B_SPLINE_H
 #define COMP_GRAPHICS_2_B_SPLINE_H
 #include <SFML/Graphics.hpp>
+#include "profile.h"
 #include <vector>
 #include <array>
 #include <ctime>
+
+
 
 class b_spline {
 public:
@@ -26,23 +29,28 @@ public:
             return *this;
         }
     };
+
     using POINT = sf::Vertex;
 
     b_spline(unsigned control_size, unsigned max_degree,
              unsigned offset) : cur_degree(1), control_size(control_size),
                                 max_degree(max_degree), offset(offset),
-                                points((control_size - cur_degree + 1) * offset),
+                                points(control_size * offset),
                                 control_points(control_size), all_knots(max_degree),
+                                coefs(max_degree),
                                 textbox(cur_degree)
     {
         gen_control_points();
         gen_knots();
+        gen_coefs();
         update();
     };
+
 
     void gen_control_points(unsigned seed = time(nullptr));
     int GetClickedPoint(int mouseX, int mouseY);
     friend void operator<<(sf::RenderWindow& window, const b_spline& spline);
+
     b_spline& operator ++() {
         cur_degree = (cur_degree % max_degree) + 1;
         textbox = cur_degree;
@@ -62,9 +70,10 @@ private:
     std::vector<POINT> points;
     std::vector<std::vector<float>> all_knots;
     std::vector<sf::CircleShape> control_points;
-    std::vector<std::vector<float>> coefs;
+    std::vector<std::vector<std::vector<float>>> coefs;
     NumberText textbox;
     void gen_knots();
+    void gen_coefs();
     float gen_N(int degree, int control, std::vector<float>& knots, float t);
 };
 

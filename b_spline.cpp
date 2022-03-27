@@ -2,8 +2,11 @@
 // Created by d3Gaff on 20.03.2022.
 //
 #include "b_spline.h"
-
+#include <iostream>
 using namespace std;
+
+static TotalDuration updDur("TOTAL UPDATE");
+static TotalDuration coefDur("TOTAL COEFS");
 
 void b_spline::gen_control_points(unsigned seed) {
     srand(seed);
@@ -27,6 +30,20 @@ void b_spline::gen_knots() {
     }
 }
 
+void b_spline::gen_coefs() {
+    ADD_DURATION(coefDur);
+    float rev_offset = 1.f/offset;
+    size_t size = control_size;
+    for(size_t deg = 1; deg <= max_degree; ++deg) {
+        coefs[deg-1].resize((size--) * offset, std::vector<float>(control_size));
+        for (float t = all_knots[deg-1][0]; t < all_knots[deg-1][deg + control_size]; t += rev_offset) {
+            for (int control = 0; control < control_size; ++control) {
+                coefs[deg-1][t*offset][control] = gen_N(deg, control, all_knots[deg-1], t);
+            }
+        }
+        std::cout << deg << '\n';
+    }
+}
 
 float b_spline::gen_N(int degree, int control, std::vector<float>& knots, float t) {
     if (degree == 0) {
@@ -50,6 +67,7 @@ float b_spline::gen_N(int degree, int control, std::vector<float>& knots, float 
 
 
 void b_spline::update() {
+    ADD_DURATION(updDur);
     float rev_offset = 1.f/offset;
     points.clear();
     points.resize((control_size - cur_degree + 1) * offset);
@@ -58,9 +76,10 @@ void b_spline::update() {
         points[(t * offset)].position.y = 0.f;
         points[(t * offset)].color = sf::Color::Green;
         for (int control = 0; control < control_size; ++control) {
-            float temp = gen_N(cur_degree, control, all_knots[cur_degree-1], t);
-            points[(t * offset)].position.x += control_points[control].getPosition().x * temp;
-            points[(t * offset)].position.y += control_points[control].getPosition().y * temp;
+            points[(t * offset)].position.x += control_points[control].getPosition().x *
+                                               coefs[cur_degree-1][t*offset][control];
+            points[(t * offset)].position.y += control_points[control].getPosition().y *
+                                               coefs[cur_degree-1][t*offset][control];
         }
     }
 
