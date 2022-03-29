@@ -1,6 +1,5 @@
 #include "b_spline.h"
 #include <iostream>
-#include <algorithm>
 
 #define EPS 0.00001f
 using namespace std;
@@ -85,8 +84,8 @@ void b_spline::initialize() {
 
 void b_spline::smart_update(unsigned controlPoint, float x, float y) {
     ADD_DURATION(updDur);
-    for (unsigned t = all_knots[cur_degree-1][std::max((int)(controlPoint), 0)] * offset;
-        t < all_knots[cur_degree-1][std::min(cur_degree + controlPoint + 1, control_size + cur_degree)] * offset;
+    for (unsigned t = all_knots[cur_degree-1][controlPoint] * offset;
+        t < all_knots[cur_degree-1][cur_degree + controlPoint + 1] * offset;
         ++t) {
         points[t].position.x += (x - control_points[controlPoint].getPosition().x)
                 * coefs[cur_degree-1][t][controlPoint];
