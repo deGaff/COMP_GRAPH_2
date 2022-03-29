@@ -85,7 +85,7 @@ void b_spline::initialize() {
 
 void b_spline::smart_update(unsigned controlPoint, float x, float y) {
     ADD_DURATION(updDur);
-    for (unsigned t = all_knots[cur_degree-1][std::max((int)(controlPoint-cur_degree), 0)] * offset;
+    for (unsigned t = all_knots[cur_degree-1][std::max((int)(controlPoint), 0)] * offset;
         t < all_knots[cur_degree-1][std::min(cur_degree + controlPoint + 1, control_size + cur_degree)] * offset;
         ++t) {
         points[t].position.x += (x - control_points[controlPoint].getPosition().x)
