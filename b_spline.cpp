@@ -1,6 +1,5 @@
 #include "b_spline.h"
 #include <iostream>
-#include <algorithm>
 
 #define EPS 0.00001f
 using namespace std;
