@@ -43,7 +43,7 @@ public:
         gen_control_points();
         gen_knots();
         gen_coefs();
-        update();
+        initialize();
     };
 
 
@@ -54,7 +54,7 @@ public:
     b_spline& operator ++() {
         cur_degree = (cur_degree % max_degree) + 1;
         textbox = cur_degree;
-        update();
+        initialize();
         return *this;
     }
 
@@ -62,19 +62,21 @@ public:
         return control_points[i];
     }
 
-    void update();
+    void initialize();
+    void smart_update(unsigned , float, float);
+    void update(int);
 
 private:
     unsigned cur_degree;
     const unsigned control_size, max_degree, offset;
     std::vector<POINT> points;
-    std::vector<std::vector<float>> all_knots;
+    std::vector<std::vector<unsigned>> all_knots;
     std::vector<sf::CircleShape> control_points;
     std::vector<std::vector<std::vector<float>>> coefs;
     NumberText textbox;
     void gen_knots();
     void gen_coefs();
-    float gen_N(int degree, int control, std::vector<float>& knots, float t);
+    float gen_N(int degree, int control, std::vector<unsigned>& knots, float t);
 };
 
 class b_spline_builder {
