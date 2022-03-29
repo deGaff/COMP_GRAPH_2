@@ -1,6 +1,3 @@
-//
-// Created by d3Gaff on 20.03.2022.
-//
 #include "b_spline.h"
 #include <iostream>
 #include <algorithm>
@@ -28,7 +25,7 @@ void b_spline::gen_knots() {
         all_knots[deg-1].resize(deg + control_size + 1);
         unsigned i = 0,
                 k = deg + control_size;
-        for (; i < deg; ++i) all_knots[deg-1][i] = 1.f;
+        for (; i < deg; ++i) all_knots[deg-1][i] = 1;
         for (; i < control_size; ++i) all_knots[deg-1][i] = i - deg + 1;
         for (; i <= k; ++i) all_knots[deg-1][i] = control_size - deg + 1;
     }
@@ -88,13 +85,13 @@ void b_spline::initialize() {
 
 void b_spline::smart_update(unsigned controlPoint, float x, float y) {
     ADD_DURATION(updDur);
-    for (unsigned t = all_knots[cur_degree-1][std::max((int)(controlPoint-cur_degree-1), 0)] * offset;
-        t < all_knots[cur_degree-1][std::min(cur_degree + controlPoint+1, control_size + cur_degree)] * offset;
+    for (unsigned t = all_knots[cur_degree-1][std::max((int)(controlPoint-cur_degree), 0)] * offset;
+        t < all_knots[cur_degree-1][std::min(cur_degree + controlPoint + 1, control_size + cur_degree)] * offset;
         ++t) {
         points[t].position.x += (x - control_points[controlPoint].getPosition().x)
-                                * coefs[cur_degree-1][t][controlPoint];
+                * coefs[cur_degree-1][t][controlPoint];
         points[t].position.y += (y - control_points[controlPoint].getPosition().y)
-                                * coefs[cur_degree-1][t][controlPoint];
+                * coefs[cur_degree-1][t][controlPoint];
     }
     control_points[controlPoint].setPosition(x, y);
 }
@@ -108,7 +105,7 @@ void b_spline::update(int controlPoint) {
                 points[t].position.x += control_points[control].getPosition().x
                         * coefs[cur_degree-1][t][control];
                 points[t].position.y += control_points[control].getPosition().y
-                                        * coefs[cur_degree-1][t][control];
+                        * coefs[cur_degree-1][t][control];
             }
         }
     }
