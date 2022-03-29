@@ -79,12 +79,10 @@ int main()
 
         if (dragging)
         {
-            auto& circ = spline.GetControlPoint(pointIndex);
             float x = mouseX - mouseRectOffset.x;
             float y = mouseY - mouseRectOffset.y;
             if(x > 0 && x < 1280 && y > 0 && y < 800) {
-                circ.setPosition(x, y);
-                spline.update();
+                spline.smart_update(pointIndex, x, y);
             }
         }
 
